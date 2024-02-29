@@ -6,12 +6,15 @@ class HackParser:
             self.text = ...
         self.model = ...
 
+    
     def set_file(self, file_path):
         self.text = ...
 
+    
     def get_name(self):
         return self.model()
 
+    
     def parse(self):
         return {
             "first_name": self.get_name(file_text),
@@ -34,6 +37,8 @@ class HackParser:
             "experienceItems": [],
             "languageItems": []
         }
+    
+    
     def extract_contact_info(self, resume_lines):
         
         email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
