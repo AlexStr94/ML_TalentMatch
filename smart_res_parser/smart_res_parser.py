@@ -1,3 +1,6 @@
+from pyresparser import ResumeParser
+
+
 class SmartResParser:
     def __init__(self):
         pass
