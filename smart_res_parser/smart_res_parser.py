@@ -127,36 +127,39 @@ class SmartResParser:
                 "contact_type": "Github"
             })
 
-        res['first_name'] = pyresparser_result['name'].split(' ')[0]
-        res['last_name'] = pyresparser_result['name'].split(' ')[-1]
-        res['middle_name'] = pyresparser_result['name'].split(' ')[2] \
-            if len(pyresparser_result['name'].split(' ')) > 2 else ""
+        if pyresparser_result['name']:
+            res['first_name'] = pyresparser_result['name'].split(' ')[0]
+            res['last_name'] = pyresparser_result['name'].split(' ')[-1]
+            res['middle_name'] = pyresparser_result['name'].split(' ')[2] \
+                if len(pyresparser_result['name'].split(' ')) > 2 else ""
 
         res['key_skills'] = pyresparser_result['skills'] or ""
 
-        for degree in pyresparser_result['degree']:
-            res['educationItems'].append({
-                "resume_education_item_id": len(res['educationItems']),
-                "year": "",
-                "organization": pyresparser_result['college_name'],
-                "faculty": "",
-                "specialty": degree,
-                "result": "",
-                "education_type": "",
-                "education_level": ""
-            })
+        if pyresparser_result['degree']:
+            for degree in pyresparser_result['degree']:
+                res['educationItems'].append({
+                    "resume_education_item_id": len(res['educationItems']),
+                    "year": "",
+                    "organization": pyresparser_result['college_name'],
+                    "faculty": "",
+                    "specialty": degree,
+                    "result": "",
+                    "education_type": "",
+                    "education_level": ""
+                })
 
-        for designation in pyresparser_result['designation']:
-            res['experienceItems'].append({
-                "resume_experience_item_id": len(res['experienceItems']),
-                "starts": "",
-                "ends": "",
-                "employer": designation,
-                "city": "",
-                "url": "",
-                "position": "",
-                "description": pyresparser_result['experience'] or "",
-                "order": len(res['experienceItems'])
-            })
+        if pyresparser_result['designation']:
+            for designation in pyresparser_result['designation']:
+                res['experienceItems'].append({
+                    "resume_experience_item_id": len(res['experienceItems']),
+                    "starts": "",
+                    "ends": "",
+                    "employer": designation,
+                    "city": "",
+                    "url": "",
+                    "position": "",
+                    "description": pyresparser_result['experience'] or "",
+                    "order": len(res['experienceItems'])
+                })
 
         return res
