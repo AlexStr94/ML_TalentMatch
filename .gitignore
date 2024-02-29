@@ -159,8 +159,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea
 
-
-AI-Resume-Analyzer
-Resume_Parsing
+#Resume_Parsing
 #resume_parser
 #pyresparser
