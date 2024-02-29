@@ -1,7 +1,15 @@
+import os
+import aiofiles
 import uvicorn
 from fastapi import FastAPI, HTTPException, status, UploadFile
 from fastapi.responses import JSONResponse
 
+from smart_res_parser.smart_res_parser import SmartResParser
+
+FILE_STORAGE = os.path.join(
+    os.path.dirname(os.path.abspath(__name__)),
+    'files'
+)
 
 class FileError(HTTPException):
     def __init__(
@@ -44,7 +52,16 @@ async def parse_resume(
     ):
         raise FileTypeError  
     
-    return {"file_type": file_type}
+    catalog = f'{FILE_STORAGE}'
+    os.makedirs(catalog, exist_ok=True)
+    out_file_path = os.path.join(catalog, file_in.filename)
+    async with aiofiles.open(out_file_path, 'wb') as out_file:
+        content = await file_in.read()
+        await out_file.write(content)
+    
+    result = SmartResParser()(out_file_path)
+    
+    return result
 
 
 if __name__ == "__main__":
@@ -53,3 +70,4 @@ if __name__ == "__main__":
         host='127.0.0.1',
         port=8000,
     )
+    # print(FILE_STORAGE)
