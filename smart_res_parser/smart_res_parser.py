@@ -1,20 +1,13 @@
-class HackParser:
-    def __init__(self, file_path=None):
-        if not file_path:
-            self.text = ...
-        else:
-            self.text = ...
-        self.model = ...
+class SmartResParser:
+    def __init__(self):
+        pass
 
-    def set_file(self, file_path):
-        self.text = ...
-
-    def get_name(self):
-        return self.model()
-
-    def parse(self):
+    def parse_resume(
+            self,
+            file_path
+    ):
         return {
-            "first_name": self.get_name(file_text),
+            "first_name": "",
             "last_name": "",
             "middle_name": "",
             "birth_date": "",
